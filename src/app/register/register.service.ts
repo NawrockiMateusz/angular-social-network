@@ -10,7 +10,7 @@ export class RegisterService {
   registerUser(
     userData: Partial<{ username: string; email: string; password: string }>
   ) {
-    const url = 'http://127.0.0.1:8000/api/register/';
+    const url = 'http://localhost:3000/auth/signup';
     return this.http.post(url, userData);
   }
 }

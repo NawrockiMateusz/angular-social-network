@@ -9,10 +9,8 @@ import { tap } from 'rxjs';
 export class LoginService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  loginUser(
-    userData: Partial<{ username: string; email: string; password: string }>
-  ) {
-    const url = 'http://127.0.0.1:8000/api/login/';
+  loginUser(userData: Partial<{ username: string; password: string }>) {
+    const url = 'http://localhost:3000/auth/signin';
     return this.http.post(url, userData).pipe(
       tap((response: any) => {
         localStorage.setItem('username', response.username);
@@ -25,7 +23,7 @@ export class LoginService {
   }
 
   logout() {
-    this.http.post('http://127.0.0.1:8000/api/logout/', {}).subscribe(
+    this.http.post('http://localhost:3000/auth/logout', {}).subscribe(
       () => {
         localStorage.removeItem('username');
         this.router.navigate(['/login']);

@@ -1,0 +1,58 @@
+<div class="search-container">
+    <mat-form-field appearance="fill">
+        <mat-label>Wyszukaj</mat-label>
+        <input matInput [(ngModel)]="searchQuery" (ngModelChange)="filterEvents()" placeholder="Wpisz szukaną frazę">
+        <mat-icon matSuffix (click)="searchQuery = ''; filterEvents()">clear</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Wybierz kategorię</mat-label>
+        <mat-select [(value)]="selectedCategory" (selectionChange)="filterEvents()">
+            <mat-option [value]="null">Wszystkie</mat-option>
+            <mat-option *ngFor="let category of availableCategories" [value]="category.name">
+                {{ category.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Lokalizacja</mat-label>
+        <input matInput [(ngModel)]="searchLocation" (ngModelChange)="filterEvents()" placeholder="Wpisz lokalizację">
+        <mat-icon matSuffix (click)="searchLocation = ''; filterEvents()">clear</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Data od</mat-label>
+        <input matInput [matDatepicker]="picker1" [(ngModel)]="searchDateStart" (dateChange)="filterEvents()">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Data do</mat-label>
+        <input matInput [matDatepicker]="picker2" [(ngModel)]="searchDateEnd" (dateChange)="filterEvents()">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+</div>
+<div class="events-list">
+    <mat-card *ngFor="let event of filteredEvents" class="event-card">
+        <div class="card-content">
+            <div class="card-image image-container">
+                <img src="../../assets/images/{{event.category}}.jpg" alt="{{ event.category }}" class="image">
+            </div>
+            <div class="card-details">
+                <mat-card-header>
+                    <mat-card-title>{{ event.title }}</mat-card-title>
+                    <mat-card-subtitle>{{ event.location }}, {{ event.date | date:'longDate' }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>Kategoria: {{ event.category }}</p>
+                    <p>Opis: {{ event.description }}</p>
+                </mat-card-content>
+            </div>
+            <div class="card-actions">
+                <button mat-button color="warn" (click)="deleteEvent(event.id)">Usuń</button>
+            </div>
+        </div>
+    </mat-card>
+</div>

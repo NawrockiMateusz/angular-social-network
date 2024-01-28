@@ -1,0 +1,75 @@
+.search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  max-width: 90%;
+  margin: auto;
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+.events-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+
+  .event-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 80%;
+    max-width: 90%;
+
+    .card-content {
+      display: flex;
+      flex-grow: 1;
+
+      .card-image {
+        flex-basis: 20%;
+        img {
+          max-width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .card-details {
+        flex-basis: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+.mat-icon {
+  cursor: pointer;
+  color: #666;
+}
+
+.events-list .event-card .card-content .card-image {
+  flex: 0 0 20%; /* Do not grow, do not shrink, start with 20% of the flex container */
+  overflow: hidden; /* This will ensure that any image bigger than the container is clipped */
+}
+
+.events-list .event-card .card-content .card-image img {
+  width: 100%;
+  height: 200px; /* Fixed height, or make it responsive as needed */
+  object-fit: cover; /* Cover the area of the container without stretching the image */
+  display: block; /* Ensures the image doesn't have any inline spacing */
+}
+
+/* Ensure the image container has a defined size */
+.image-container {
+  width: 100%; /* Adjust if necessary */
+  height: 200px; /* Adjust if necessary */
+}
